@@ -1,5 +1,6 @@
 var assert = require('assert');
-var update = require('./');
+import update from "./src/update";
+//var update = require('./src/update');
 
 describe('update', function() {
 
