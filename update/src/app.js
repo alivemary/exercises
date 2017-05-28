@@ -1,7 +1,7 @@
 import update from "./update";
 
 var state = {};
-var nextState = update(state, {'hasOwnProperty': {$set: 'a'}});
+var nextState = update(state, {'hasOwnProperty': {$push: 'a'}});
 
 
 console.log(state);
