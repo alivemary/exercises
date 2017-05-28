@@ -19,16 +19,7 @@ export default function update(initialData, updateData) {
   });
 
   commandsMap.set("$merge", (initialObject, commandObject) => {
-    let mergedData = {};
-    for (let prop in initialObject) {
-      mergedData = Object.assign({}, mergedData, {
-        [prop]: initialObject[prop]
-      });
-    }
-    for (let prop in commandObject) {
-      mergedData = Object.assign({}, mergedData, commandObject[prop]);
-    }
-    return mergedData;
+    return Object.assign({}, initialObject, commandObject["$merge"]);
   });
 
   commandsMap.set("$apply", (initialObject, commandObject) => {
@@ -38,6 +29,18 @@ export default function update(initialData, updateData) {
 
   commandsMap.set("$set", (initialObject, commandObject) => {
     return commandObject["$set"];
+  });
+
+  commandsMap.set("$delete", (initialObject, commandObject) => {
+    let newData = {};
+    let keys = Object.keys(initialObject);
+    newData = keys.reduce((obj, key) => {
+      if (!commandObject["$delete"].includes(key)) {
+        return Object.assign({}, obj, { [key]: initialObject[key] });
+      }
+      return obj;
+    }, {});
+    return newData;
   });
 
   commandsMap.set("$setState", (initialObject, updateObject) => {

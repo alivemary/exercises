@@ -53,7 +53,7 @@ describe('update', function() {
     });
 
     it('should support merge', function() {
-      assert.deepEqual(update({a: 'b'}, {$merge: {c: 'd'}}), {a: 'b', c: 'd'});
+      assert.deepEqual(update({a: 'b', c: "k"}, {$merge: {c: 'd'}}), {a: 'b', c: 'd'});
     });
 
     it('should support set', function() {
@@ -62,6 +62,10 @@ describe('update', function() {
 
     it('should support apply', function() {
       assert.equal(update(2, {$apply: function(x) { return x * 2; }}), 4);
+    });
+
+    it('should support delete', function() {
+      assert.deepEqual(update({a: 3, b: "c", c: {d: 34}}, {$delete: ['a', 'c']}), {b: "c"});
     });
 
     it('should support deep updates', function() {
