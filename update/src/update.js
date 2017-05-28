@@ -56,12 +56,11 @@ export default function update(initialData, updateData) {
   //case of complex state update
   return commandsMap.get("$setState")(initialData, updateData);
 
-
   //$setState function
   function iterateTroughObject(state, commandObject) {
     let newData = {};
     let updateDataFields = Object.keys(commandObject);
-    
+
     for (let prop in state) {
       if (ownProp(commandObject, prop)) {
         updateDataFields = updateDataFields.filter(field => {
@@ -102,7 +101,7 @@ export default function update(initialData, updateData) {
     if (key[0].charAt(0) === "$") {
       return key[0];
     }
-    return false;
+    return "";
   }
   //safe hasOwnProperty check
   function ownProp(obj, prop) {
@@ -111,9 +110,5 @@ export default function update(initialData, updateData) {
     } else {
       return Object.prototype.hasOwnProperty.call(obj, prop);
     }
-  }
-
-  function errorMessage(string) {
-    console.log(string);
   }
 }
