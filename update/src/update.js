@@ -52,8 +52,9 @@ export default function update(initialData, updateData) {
   });
 
   //case of simple update
-  if (getCommand(updateData)) {
-    return commandsMap.get(getCommand(updateData))(initialData, updateData);
+  let command = getCommand(updateData);
+  if (command) {
+    return commandsMap.get(command)(initialData, updateData);
   }
 
   //case of complex state update
