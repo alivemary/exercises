@@ -2,11 +2,11 @@ export default function update(initialData, updateData) {
   let commandsMap = new Map();
 
   commandsMap.set("$push", (initialArray, commandObject) => {
-    return [...initialArray, commandObject["$push"][0]];
+    return [...initialArray, ...commandObject["$push"]];
   });
 
   commandsMap.set("$unshift", (initialArray, commandObject) => {
-    return [commandObject["$unshift"][0], ...initialArray];
+    return [...commandObject["$unshift"], ...initialArray];
   });
 
   commandsMap.set("$splice", (initialArray, commandObject) => {

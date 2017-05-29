@@ -1,7 +1,7 @@
 import update from "./update";
 
-var state = {a: 3, b: "c", c: {d: 34}};
-var nextState = update(state, {$delete: ['a', "c"]});
+var state = [1, 2, 3];
+var nextState = update(state, {$push: [4, 3]});
 
 
 console.log(state);
